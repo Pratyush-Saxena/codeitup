@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+{%load static%}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Codeup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'compiler/assets/css/Navigation-with-Button.css'%}">
+    <link rel="stylesheet" href="{% static 'compiler/assets/css/styles.css'%}">
+    <link rel="stylesheet" href="{% static 'compiler/assets/css/textarea.css'%}">
+    <link rel="stylesheet" href="{% static 'compiler/assets/css/Tricky-Grid---2-Column-on-Desktop--Tablet-Flip-Order-of-12-Column-rows-on-Mobile.css'%}">
+</head>
+<style>
+.sub_button {
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  width: 100px;
+  height: 45px;
+  border: 1px solid  #e7e7e7;
+  border-radius: 5px;
+  background-color:rgb(120, 120, 120);
+  font-size: 18px;
+  margin-bottom: 10px;
+  outline: none;
+}
+.sub_button:hover{
+  background-color:rgb(60, 60, 60);
+  border: 1px solid rgb(60,60,60);
+}
+
+body{
+    background-color: rgb(240, 240, 240);
+}
+.mb-0{
+    margin-left: 10px;
+}
+
+@media screen and (max-width 768px){
+
+}
+</style>
+<body>
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="padding: 5px;">
+        <div class="container"><a class="navbar-brand" href="#">CODEUP</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav mr-auto" style='margin-left:25px'>
+                     <li class="nav-item" style='padding-top:20px;margin-right: 10px'><a class="nav-link" href="#run_status">Run Status</a></li>
+                    <li class="nav-item" style='padding-top:25px'><input type="text" name="lang" id="lang" list="languages" form="exec_form" style='color:grey;border:none;padding-left:5px;border-bottom:1px solid grey;width:auto' placeholder='Select Language'><br><br>
+            <datalist id="languages">
+                <option value="C"></option>
+                <option value="CPP"></option>
+                <option value="CPP11"></option>
+                <option value="CPP14"></option>
+                <option value="CLOJURE"></option>
+                <option value="CSHARP"></option>
+                <option value="GO"></option>
+                <option value="HASKELL"></option>
+                <option value="JAVA"></option>
+                <option value="JAVA8"></option>
+                <option value="JAVASCRIPT"></option>
+                <option value="JAVASCRIPT_NODE"></option>
+                <option value="KOTLIN"></option>
+                <option value="OBJECTIVEC"></option>
+                <option value="PASCAL"></option>
+                <option value="PERL"></option>
+                <option value="PHP"></option>
+                <option value="PYTHON"></option>
+                <option value="PYTHON3"></option>
+                <option value="R"></option>
+                <option value="RUBY"></option>
+                <option value="RUST"></option>
+                <option value="SCALA"></option>
+                <option value="SWIFT_4_1"></option>
+                <option value="SWIFT"></option>
+
+            </datalist></li>
+           
+                </ul><span class="navbar-text actions"> <a class="login" href="#">Log In</a><a class="btn btn-light action-button" role="button" href="#">Sign Up</a></span>
+            </div>
+        </div>
+    </nav>
+    <div class="row" style="width: 100vw;margin-right: 0;">
+        <div class="col-sm-6" style="max-width: 100vw;">
+            <div style="height: 500px;margin-left:10px;margin-bottom: 10px;">
+                <div class="field" style="height: 100%;"><textarea id="source_code_text" class="form-control" name="float-textarea" style="border: 0;border-bottom: 1px solid #E0E0E0;height: 100%;" placeholder=" " disabled>{{source_code}}</textarea><label class="mb-0" for="float-textarea" >Code out something here..</label></div>
+            </div>
+            <div class="custom-file" style="margin-left:10px"><input type="file" id='source_code' name='source_code' oninput="myfunc2()" class="custom-file-input" form="exec_form"><label id="code_file" class="custom-file-label">Upload Source Code File</label></div>
+        </div>
+        <div class="col-sm-6" style="max-width: 100vw">
+            <div style="height: 250px;margin-left: 10px">
+                <div class="field" style="height: 100%;"><textarea disabled class="form-control" name="float-textarea" style="border: 0;border-bottom: 1px solid #E0E0E0;height: 100%;" placeholder=" ">{{output}}</textarea><label class="mb-0" for="float-textarea">Output</label></div>
+            </div>
+            <div style="height: 250px;margin-bottom: 10px;margin-left: 10px">
+                <div class="field" style="height: 100%;"><textarea id="input_text" disabled class="form-control" name="float-textarea" style="border: 0;border-bottom: 1px solid #E0E0E0;height: 100%;" placeholder=" ">{%if usr_input %}{{usr_input}}{%endif%}</textarea><label class="mb-0" for="float-textarea">Input</label></div>
+            </div>
+            <div class="custom-file" style="margin-left:10px"><input name='usr_input' id="usr_input" oninput="myfunc1()" type="file" class="custom-file-input" form="exec_form"><label class="custom-file-label" id="input_file">Upload Input File</label></div>
+        </div>
+    </div>
+    <section id="run_status" style="height: 45px;margin-top: 10px;text-align: center;margin-bottom: 25px">
+        <div style="display: inline-block;">
+        <span style="margin-right: 10px;margin-left: 10px"><b>Compilation Status : </b>{%if status %}{{status}}{%else%}NA{%endif%}</span>  |   <span style="margin-right: 10px;margin-left: 10px"><b>Status Detail: </b>{% if status_detail %}{{status_detail}}{% else %} NA {%endif%}</span>|<span style="margin-right: 10px;margin-left: 10px"><b>Time: </b>{% if time_used %}{{time_used}}{% else %} NA {%endif%}</span>|
+        <span style="margin-right: 10px;margin-left: 10px"><b>Memory: </b>{% if memory_used %}{{memory_used}}{% else %} NA {%endif%}</span>
+
+    <form enctype="multipart/form-data" action="" method="post" id="exec_form" style="position: relative;display: flex-box;margin-top: 5px">
+        {% csrf_token %}
+            <input type="submit" value="Submit" class="sub_button">
+            
+        </form>
+    </div>
+    </section>
+    <script>
+        function myfunc1() {
+            document.getElementById('input_file').innerText=document.getElementById('usr_input').value;
+        }
+        function myfunc2() {
+            document.getElementById('code_file').innerText=document.getElementById('source_code').value;
+        }
+     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

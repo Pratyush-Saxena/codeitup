@@ -1,0 +1,12 @@
+Django==3.1.7
+asgiref
+certifi
+chardet
+dj-database-url
+gunicorn
+idna
+pytz
+requests
+sqlparse
+urllib3
+whitenoise

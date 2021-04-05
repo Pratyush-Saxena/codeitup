@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="text-align: center;">
+    <div id="container" style="position: relative;display: inline-block;margin-top: 150px;">
+        <form enctype="multipart/form-data" action="" method="post">
+        {% csrf_token %}
+        <label for="source_code">Source Code File : </label>
+            <input type="file" name="source_code" id="source_code"><br><br>
+        <label for="usr_input">Input File : </label>
+            <input type="file" name="usr_input" id="usr_input"><br><br>
+        <label for="lang">Language : </label>
+            <input type="text" name="lang" id="lang" list="languages"><br><br>
+            <datalist id="languages">
+                <option value="CPP11"></option>
+                <option value="PYTHON3"></option>
+                <option value="JAVASCRIPT_NODE">Javascript</option>
+            </datalist>
+            <input type="submit" value="Submit">
+        </form>
+        <br><br>
+        <span>Output will be display here..</span>
+       <textarea name="" id="" cols="30" rows="10">{{output}}</textarea><br><br>
+       <span>STATUS : {{status}}</span><br>
+       <span>STATUS Detail: {{status_detail}}</span><br>
+
+    </div>
+</body>
+</html>
