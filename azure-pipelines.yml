@@ -10,8 +10,6 @@ pool:
   vmImage: ubuntu-latest
 strategy:
   matrix:
-    Python35:
-      PYTHON_VERSION: '3.5'
     Python36:
       PYTHON_VERSION: '3.6'
     Python37:
@@ -32,7 +30,7 @@ steps:
       """Search all subdirectories for `manage.py`."""
       from glob import iglob
       from os import path
-      # Python >= 3.5
+      # Python > 3.5
       manage_py = next(iglob(path.join('**', 'manage.py'), recursive=True), None)
       if not manage_py:
           raise SystemExit('Could not find a Django project')
